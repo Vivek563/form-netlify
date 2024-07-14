@@ -1,9 +1,20 @@
+"use client";
+import { useEffect, useState } from "react";
+
 export default function Home() {
+     const [success, setSuccess] = useState(false);
+
+     useEffect(() => {
+          if (window.location.search.includes("success=true")) {
+               setSuccess(true);
+          }
+     }, []);
      return (
           <>
-               <div className="flex items-center justify-center min-h-screen gap-10">
+               {success && <p style={{ color: "green" }}>Successfully submitted form!</p>}
+               <div className="flex items-center justify-center min-h-screen gap-10 text-black">
                     <div className="flex gap-10">
-                         <form className="flex gap-10 flex-col" name="contact" method="POST" data-netlify="true">
+                         <form action="/?success=true" className="flex gap-10 flex-col" name="contact" method="POST" data-netlify="true">
                               <input type="hidden" name="form-name" value="contact" />
                               <p>
                                    <label htmlFor="name">Name</label>
